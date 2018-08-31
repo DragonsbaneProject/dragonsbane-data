@@ -1,9 +1,6 @@
 package io.dragonsbane.data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import io.onemfive.data.DID;
 import io.onemfive.data.JSONSerializable;
@@ -11,6 +8,7 @@ import io.onemfive.data.util.JSONParser;
 
 public class ImpairmentTest implements JSONSerializable {
 
+    private String id;
     private DID did;
     private String name;
     private Boolean baseline = false;
@@ -25,16 +23,34 @@ public class ImpairmentTest implements JSONSerializable {
 
     List<Integer> cardsUsed = new ArrayList<>();
 
+    public ImpairmentTest() {
+    }
+
     public ImpairmentTest(DID did, String name) {
         this.did = did;
         this.name = name;
     }
 
+    public ImpairmentTest(DID did, String name, Long timeStarted, Long timeEnded, Boolean baseline, Double bloodAlcoholContent) {
+        this.did = did;
+        this.name = name;
+        this.timeStarted = timeStarted;
+        this.timeEnded = timeEnded;
+        this.baseline = baseline;
+        this.bloodAlcoholContent = bloodAlcoholContent;
+    }
+
     public String getId() {
-        return did.getAlias()+":"+timeStarted;
+        return id;
+    }
+
+    private void setId() {
+        if(did!=null && did.getAlias() != null && timeEnded != null)
+            id = did.getAlias()+":"+timeEnded;
     }
 
     public DID getDid() {
+        setId();
         return did;
     }
 
@@ -71,6 +87,7 @@ public class ImpairmentTest implements JSONSerializable {
     }
 
     public void setTimeEnded(Long timeEnded) {
+        setId();
         this.timeEnded = timeEnded;
     }
 
@@ -270,5 +287,15 @@ public class ImpairmentTest implements JSONSerializable {
         if(m.get("negatives")!=null) negatives = (List<Long>)JSONParser.parse((String)m.get("negatives"));
         if(m.get("cardsUsed")!=null) cardsUsed = (List<Integer>)JSONParser.parse((String)m.get("cardsUsed"));
     }
+
+    public static Comparator<ImpairmentTest> compareTimeEnded = new Comparator<ImpairmentTest>() {
+        @Override
+        public int compare(ImpairmentTest i1, ImpairmentTest i2) {
+            if(i1==null || i2==null) return 0;
+            if(i1.timeEnded > i2.timeEnded) return 1;
+            if(i1.timeEnded.equals(i2.timeEnded)) return 0;
+            else return -1;
+        }
+    };
 }
 
