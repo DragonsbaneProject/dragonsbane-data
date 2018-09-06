@@ -261,11 +261,11 @@ public class ImpairmentTest implements JSONSerializable {
         if(timeStarted!=null) m.put("timeStarted",timeStarted+"");
         if(timeEnded!=null) m.put("timeEnded",timeEnded+"");
         if(bloodAlcoholContent!=null) m.put("bloodAlcoholContent",bloodAlcoholContent+"");
-        if(successes!=null && successes.size()>0) m.put("successes",JSONParser.toString(successes));
-        if(misses!=null && misses.size()>0) m.put("misses",JSONParser.toString(misses));
-        if(inappropriates!=null && inappropriates.size()>0) m.put("inappropriates",JSONParser.toString(inappropriates));
-        if(negatives!=null && negatives.size()>0) m.put("negatives",JSONParser.toString(negatives));
-        if(cardsUsed!=null && cardsUsed.size()>0) m.put("cardsUsed",JSONParser.toString(cardsUsed));
+        if(successes!=null) m.put("successes",JSONParser.toString(successes));
+        if(misses!=null) m.put("misses",JSONParser.toString(misses));
+        if(inappropriates!=null) m.put("inappropriates",JSONParser.toString(inappropriates));
+        if(negatives!=null) m.put("negatives",JSONParser.toString(negatives));
+        if(cardsUsed!=null) m.put("cardsUsed",JSONParser.toString(cardsUsed));
 
         return m;
     }
