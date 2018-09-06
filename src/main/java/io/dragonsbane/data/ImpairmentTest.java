@@ -50,12 +50,12 @@ public class ImpairmentTest implements JSONSerializable {
     }
 
     public DID getDid() {
-        setId();
         return did;
     }
 
     public void setDid(DID did) {
         this.did = did;
+        setId();
     }
 
     public String getName() {
@@ -87,8 +87,8 @@ public class ImpairmentTest implements JSONSerializable {
     }
 
     public void setTimeEnded(Long timeEnded) {
-        setId();
         this.timeEnded = timeEnded;
+        setId();
     }
 
     public Double getBloodAlcoholContent() {
@@ -279,7 +279,7 @@ public class ImpairmentTest implements JSONSerializable {
         if(m.get("name")!=null) name = (String)m.get("name");
         if(m.get("baseline")!=null) baseline = m.get("baseline").equals("1");
         if(m.get("timeStarted")!=null) timeStarted = Long.parseLong((String)m.get("timeStarted"));
-        if(m.get("timeEnded")!=null) timeStarted = Long.parseLong((String)m.get("timeEnded"));
+        if(m.get("timeEnded")!=null) timeEnded = Long.parseLong((String)m.get("timeEnded"));
         if(m.get("bloodAlcoholContent")!=null) bloodAlcoholContent = Double.parseDouble((String)m.get("bloodAlcoholContent"));
         if(m.get("successes")!=null) successes = (List<Long>)JSONParser.parse((String)m.get("successes"));
         if(m.get("misses")!=null) misses = (List<Long>)JSONParser.parse((String)m.get("misses"));
